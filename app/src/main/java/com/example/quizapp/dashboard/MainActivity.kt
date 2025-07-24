@@ -1,4 +1,4 @@
-package com.example.quizapp
+package com.example.quizapp.dashboard
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
