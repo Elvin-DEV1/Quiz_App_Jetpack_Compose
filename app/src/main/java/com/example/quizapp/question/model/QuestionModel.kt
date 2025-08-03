@@ -11,7 +11,7 @@ data class QuestionModel(
     val answer2: String?,
     val answer3: String?,
     val answer4: String?,
-    val correctAnswer: Int,
+    val correctAnswer: String?,
     val score: Int,
     val picPath: String?,
     val clickedAnswer: String?

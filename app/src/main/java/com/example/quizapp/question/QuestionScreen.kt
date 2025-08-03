@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,8 +35,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quizapp.R
+import com.example.quizapp.question.components.AnswerItem
 import com.example.quizapp.question.model.QuestionModel
 import com.example.quizapp.question.model.QuestionUiState
+
 
 @Composable
 fun QuestionScreen(
@@ -61,7 +64,6 @@ fun QuestionScreen(
             context.packageName
         )
     }
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -136,7 +138,7 @@ fun QuestionScreen(
 
         item {
             LinearProgressIndicator(
-                progress = (state.currentIndex+1)/10f,
+                progress = { (state.currentIndex + 1) / 10f },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 24.dp)
@@ -162,7 +164,7 @@ fun QuestionScreen(
 
         item {
             Image(
-                painter = painterResource(imageResId),
+                painterResource(imageResId),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -171,6 +173,40 @@ fun QuestionScreen(
                     .clip(RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Crop
             )
+        }
+
+        itemsIndexed(
+            listOf(
+                currentQuestion.answer1 ?: "",
+                currentQuestion.answer2 ?: "",
+                currentQuestion.answer3 ?: "",
+                currentQuestion.answer4 ?: ""
+            )
+        ) { index, answerText ->
+            val answerLetter = listOf("a", "b", "c", "d")[index]
+            val isCorrect = selectedAnswer != null && answerLetter == currentQuestion.correctAnswer
+            val isWrong = selectedAnswer == answerLetter && !isCorrect
+
+            AnswerItem(
+                text = answerText,
+                isCorrect = isCorrect,
+                isWrong = isWrong,
+                isSelected = selectedAnswer != null
+            ) {
+                val updatedQuestion = state.questions.toMutableList()
+                val updateQuestion =
+                    updatedQuestion[state.currentIndex].copy(clickedAnswer = answerLetter)
+                updatedQuestion[state.currentIndex] = updateQuestion
+                val scoreToAdd = if (answerLetter == updateQuestion.correctAnswer) 5 else 0
+                state = state.copy(
+                    questions = updatedQuestion,
+                    score = state.score + scoreToAdd
+                )
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -186,11 +222,12 @@ fun QuestionScreenPreview() {
             answer2 = "Madrid",
             answer3 = "Paris",
             answer4 = "Rome",
-            correctAnswer = 3,
+            correctAnswer = "c",
             score = 10,
-            picPath = null,
+            picPath = "q_1",
             clickedAnswer = null
         )
     )
     QuestionScreen(questions = questions, onFinish = {}, onBackClick = {})
 }
+
