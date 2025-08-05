@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.quizapp.R
 
 @Composable
-fun onBackRow(onBack: () -> Unit) {
+fun OnBackRow(onBack: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -46,5 +46,5 @@ fun onBackRow(onBack: () -> Unit) {
 @Preview
 @Composable
 fun OnBackRowPreview() {
-    onBackRow(onBack = {})
+    OnBackRow(onBack = {})
 }

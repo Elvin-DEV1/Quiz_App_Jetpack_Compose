@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.quizapp.R
 import com.example.quizapp.leader.components.LeaderRow
 import com.example.quizapp.leader.components.TopThreeSection
-import com.example.quizapp.leader.components.onBackRow
+import com.example.quizapp.leader.components.OnBackRow
 import com.example.quizapp.leader.model.UserModel
 
 @Composable
@@ -31,7 +31,7 @@ fun LeaderScreen(
         verticalArrangement = Arrangement.Top
     ) {
         item {
-            onBackRow(onBackClick)
+            OnBackRow(onBackClick)
         }
         item {
             TopThreeSection(topUsers)
