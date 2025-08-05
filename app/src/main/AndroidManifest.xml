@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizApp">
         <activity
+            android:name=".leader.LeaderActivity"
+            android:exported="false" />
+        <activity
             android:name=".score.ScoreActivity"
             android:exported="false" />
         <activity

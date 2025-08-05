@@ -51,7 +51,7 @@ fun MainScreen(
         BottomNavigationBar(
             modifier = Modifier.align(Alignment.BottomCenter),
             onItemSelected = { itemId ->
-                if (itemId==R.id.home){
+                if (itemId==R.id.board){
                     onBoardClick()
                 }
             }

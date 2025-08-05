@@ -93,7 +93,7 @@ fun GameButton(
     }
 }
 
-//@Preview
+@Preview
 @Composable
 fun GameButtonPreview() {
     GameButton(

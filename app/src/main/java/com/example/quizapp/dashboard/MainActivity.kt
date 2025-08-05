@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.core.content.ContextCompat
 import com.example.quizapp.R
 import com.example.quizapp.dashboard.screens.MainScreen
+import com.example.quizapp.leader.LeaderActivity
 import com.example.quizapp.question.QuestionActivity
 import com.example.quizapp.question.model.QuestionModel
 
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     startActivity(intent)
                 },
                 onBoardClick = {
-
+                    startActivity(Intent(this, LeaderActivity::class.java))
                 }
             )
         }
